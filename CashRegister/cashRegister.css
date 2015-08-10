@@ -1,0 +1,49 @@
+.row, div[class^="col-"] {
+padding: 0px 2px 2px 0px !important;
+margin:0px 0px 0px 0px !important;
+    padding-right: 0;
+    padding-left: 0;
+
+}
+.form-group{
+	margin:0px 5px 5px 0px;
+}
+
+@-webkit-keyframes on-blinking-green {
+   from {
+      background-color: #33cc33;
+   }
+   to {
+      background-color: #009933;
+   }
+}
+
+@keyframes on-blinking-green {
+   from {
+      background-color: #33cc33;
+   }
+   to {
+      background-color: #009933;
+   }
+}
+
+@-moz-keyframes on-blinking-green {
+   from {
+      background-color: #33cc33;
+   }
+   to {
+      background-color: #009933;
+   }
+}
+
+.blinking {
+   -webkit-animation-iteration-count: infinite !important;
+   -webkit-animation-duration: 1s !important;
+   background-color: #0000ff !important;
+   -webkit-animation-name: on-blinking-green !important;
+
+   -moz-animation-iteration-count: infinite !important;
+   -moz-animation-duration: 1s !important;
+   background-color: #0000ff !important;
+   -moz-animation-name: on-blinking-green !important;
+}
