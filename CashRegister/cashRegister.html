@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <title>Simple Cash Register</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="cashRegister.css">
+</head>
+<body>
+<div class="row" style="background-color:black">
+    <h1 style="color:white"><strong>Simple Cash Register</strong></h1>
+</div>
+
+<div class="container">
+    <div class="row">
+    <h5>Please enter the total bill amount and the cash denominations provided by the
+        customer</h5>
+    </div>
+        <div class="row"><!-- Total Bill Amount & Reset Starts -->
+            <div class="form-group col-md-3"><!-- Total Bill Amount Starts -->
+                <label for="bill">Total Bill Amount</label>
+                <input type="number" min="0" step="0.01" class="form-control" id="bill"/>
+            </div><!-- Total Bill Amount Ends -->
+
+
+            <div class="form-group col-md-2"><!-- Reset Starts -->
+                <label for="reset">Clear transaction</label>
+            <button type="button" id="reset" class="btn btn-md btn-primary form-control" onclick=reset()>Reset</button>
+            </div><!-- Reset Ends -->
+
+        </div><!-- Total Bill Amount & Reset Ends -->
+
+        <div id="customerDenom" class="col-md-4"><!-- Cash Denominations provided by customer Starts -->
+            <h3>Cash paid by the customer</h3>
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <label for="b20Count">$20 bills:</label>
+                    <input type="number" min="0" step="1" class="form-control" id="b20Count" value="0">
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="b10Count">$10 bills:</label>
+                    <input type="number" min="0" step="1" class="form-control" id="b10Count" value="0">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <label for="b5Count">$5 bills:</label>
+                    <input type="number" min="0" step="1" class="form-control" id="b5Count" value="0">
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="b2Count">$2 bills:</label>
+                    <input type="number" min="0" step="1" class="form-control" id="b2Count" value="0">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <label for="b1Count">$1 bills/coins:</label>
+                    <input type="number" min="0" step="1" class="form-control" id="b1Count" value="0">
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="b50cCount">50 cent coins:</label>
+                    <input type="number" min="0" step="1" class="form-control" id="b50cCount" value="0">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <label for="b25cCount">25 cent coins:</label>
+                    <input type="number" min="0" step="1" class="form-control" id="b25cCount" value="0">
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="b10cCount">10 cent coins:</label>
+                    <input type="number" min="0" step="1" class="form-control" id="b10cCount" value="0">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <label for="b5cCount">5 cent coins:</label>
+                    <input type="number" min="0" step="1" class="form-control" id="b5cCount" value="0">
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="b1cCount">1 cent coins:</label>
+                    <input type="number" min="0" step="1" class="form-control" id="b1cCount" value="0">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <button type="button" class="btn btn-lg btn-primary" onclick=getChangeDenomCounts()>Calculate Change</button>
+                </div>
+            </div>
+        </div><!-- Cash Denominations provided by customer Ends -->
+        <div class="col-md-4" id="divReturnCash"><!-- To be returned to customer Starts -->
+            <h3>To be returned to customer</h3>
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <label for="r20Count">$20 bills:</label>
+                    <input type="text" class="form-control" id="r20Count" value="0" readonly="readonly">
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="r10Count">$10 bills:</label>
+                    <input type="text" class="form-control" id="r10Count" value="0" readonly="readonly">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <label for="r5Count">$5 bills:</label>
+                    <input type="text" class="form-control" id="r5Count" value="0" readonly="readonly">
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="r2Count">$2 bills:</label>
+                    <input type="text" class="form-control" id="r2Count" value="0" readonly="readonly">
+                </div>
+            </div>
+            <div class="row ">
+                <div class="form-group col-md-5">
+                    <label for="r1Count">$1 bills/coins:</label>
+                    <input type="text" class="form-control" id="r1Count" value="0" readonly="readonly">
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="r50cCount">50 cent coins:</label>
+                    <input type="text" class="form-control" id="r50cCount" value="0" readonly="readonly">
+                </div>
+            </div>
+            <div class="row ">
+                <div class="form-group col-md-5">
+                    <label for="r25cCount">25 cent coins:</label>
+                    <input type="text" class="form-control" id="r25cCount" value="0" readonly="readonly">
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="r10cCount">10 cent coins:</label>
+                    <input type="text" class="form-control" id="r10cCount" value="0" readonly="readonly">
+                </div>
+            </div>
+            <div class="row ">
+                <div class="form-group col-md-5">
+                    <label for="r5cCount">5 cent coins:</label>
+                    <input type="text" class="form-control" id="r5cCount" value="0" readonly="readonly">
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="r5cCount">1 cent coins:</label>
+                    <input type="text" class="form-control" id="r1cCount" value="0" readonly="readonly">
+                </div>
+            </div>
+            <div class="form-group col-md-5">
+                <button type="button" class="btn btn-lg btn-primary blinking" id="transComplete" onclick="transactionComplete()">Click to Complete Transaction</button>
+            </div>
+        </div> <!-- To be returned to customer Ends -->
+        <div class="col-md-4" id="cashRegisterState"> <!-- Current Cash Register status Starts-->
+            <h3>Current Register status <button type="button" class="btn btn-sm btn-primary" id="editRegister" onclick="enableCashRegisterEdit()">Edit</button></h3>
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <label for="c20Count">$20 bills:</label>
+                    <input type="text" class="form-control" id="c20Count" min ="0" value="0" step="1">
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="c10Count">$10 bills:</label>
+                    <input type="text" class="form-control" id="c10Count"  min ="0" value="0" step="1">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <label for="c5Count">$5 bills:</label>
+                    <input type="text" class="form-control" id="c5Count"  min ="0" value="0" step="1">
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="c2Count">$2 bills:</label>
+                    <input type="text" class="form-control" id="c2Count"  min ="0" value="0" step="1">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <label for="c1Count">$1 bills/coins:</label>
+                    <input type="text" class="form-control" id="c1Count"  min ="0" value="0" step="1">
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="c50cCount">50 cent coins:</label>
+                    <input type="text" class="form-control" id="c50cCount"  min ="0" value="0" step="1">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <label for="c25cCount">25 cent coins:</label>
+                    <input type="text" class="form-control" id="c25cCount"  min ="0" value="0" step="1">
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="c10cCount">10 cent coins:</label>
+                    <input type="text" class="form-control" id="c10cCount"  min ="0" value="0" step="1">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <label for="c5cCount">5 cent coins:</label>
+                    <input type="text" class="form-control" id="c5cCount"  min ="0" value="0" step="1">
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="c1cCount">1 cent coins:</label>
+                    <input type="text" class="form-control" id="c1cCount"  min ="0" value="0">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <button type="button" class="btn btn-lg btn-primary" onclick=initializeRegister()>Update</button>
+                </div>
+                <div class="form-group col-md-5">
+                    <button type="button" class="btn btn-lg btn-primary" onclick="cancelRegisterEdit()">Cancel</button>
+                </div>
+            </div>
+        </div><!-- Current Cash Register status Ends-->
+    </div> <!-- Container Ends -->
+<!-- JavaScript Files -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="cashRegister.js"></script>
+<script>
+       window.onload = init();
+</script>
+
+</body>
+</html>
